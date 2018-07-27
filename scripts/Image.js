@@ -27,7 +27,8 @@ class Image {
     var features = [];
     
     for (let character of line) {
-      features.push(new Feature(character));
+      let feature = new Feature(character);
+      features.push(feature);
     }
     
     return features;

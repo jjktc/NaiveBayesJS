@@ -20,8 +20,31 @@ function loadFile(sourceUrl, callback) {
   xobj.send(null);
 }
 
+function train(imageData, labelData) {
+  let images = imageData.split("\n");
+  let labels = labelData.split("\n");
+  
+  console.log("Training using loaded data", {
+    images: images,
+    labels: labels
+  });
+  
+  let trainer = new Trainer(images, labels);
+  console.log(trainer.getImages()[0].print());
+}
+
 function run() {
-  loadFile("../training/testimages", function(data) {
-    console.log(data);
+  loadFile("../training/smallimages", function(images) {
+    console.log("Loaded image data", {
+      success: (images && images != "")
+    });
+
+    loadFile("../training/smalllabels", function(labels) {
+      console.log("Loaded label data", {
+        success: (labels && labels != "")
+      });
+
+      train(images, labels);
+    });
   });
 }
