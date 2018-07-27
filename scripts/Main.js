@@ -1,3 +1,8 @@
+/**
+ * NOTE: THIS ENTIRE PROGRAM WAS HACKED TOGETHER IN A MATTER OF SEVERAL HOURS SO DO NOT JUDGE
+ * THE QUALITY OF SOME OF THE CODE
+ */
+
 var autoClassify = true;
 var model;
 var classifyImages;

@@ -1,7 +1,8 @@
 # NaiveBayesJS
 A JavaScript Naive Bayes image classifier
 
-Based off of my C++ Naive Bayes image classifier. Uses a subset of the MNIST data set to classify handwriting numbers 0-9.
+## NOTE TO READER
+This entire program was written in very short order (roughly 5 hours) so some of the coding in the drawing side is very hacked together and not well documented, structured, or formatted. Most of the design time was spent on the actual Machine Learning algorithm, not the random drawing application I threw in at the last second for fun.
 
 ## Normal
 Normal mode simply runs each image in the test set one by one and spits out the statistics as it goes as well as the current specimen.

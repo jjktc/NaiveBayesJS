@@ -1,3 +1,8 @@
+/**
+ * NOTE: THIS ENTIRE PROGRAM WAS HACKED TOGETHER IN A MATTER OF SEVERAL HOURS SO DO NOT JUDGE
+ * THE QUALITY OF SOME OF THE CODE
+ */
+
 function addTable() {
   let table = document.getElementById("drawTable");
 
@@ -21,6 +26,11 @@ function addTable() {
       });
       cell.addEventListener("mousedown", function() {
         oThis.mouseColor = !(oThis.picture[i][j]);
+      });
+      cell.addEventListener("click", function() {
+        oThis.picture[i][j] = !oThis.picture[i][j];
+        
+        cell.style.backgroundColor = (oThis.picture[i][j]) ? "black" : "white";
       });
     }
 
