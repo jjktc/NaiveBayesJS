@@ -1,5 +1,5 @@
 /**
- * Load the contents of a given JSON file
+ * Load the contents of a given text file
  *
  * @param {function (string)} callback the callback function that receives the response
  */
@@ -21,7 +21,7 @@ function loadFile(sourceUrl, callback) {
 }
 
 function run() {
-  loadFile("../training/testlabels", function(data) {
+  loadFile("../training/testimages", function(data) {
     console.log(data);
   });
 }
