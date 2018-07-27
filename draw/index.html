@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>NaiveBayesJS</title>
+
+  <style type="text/css">
+    html,
+    body,
+    #tbl_wrap {
+      height: 100%;
+      width: 100%;
+      padding: 0;
+      margin: 0;
+      border: none;
+    }
+
+    #td_wrap {
+      vertical-align: middle;
+      text-align: center;
+      border: none;
+    }
+
+    #div_wrap {
+      display: inline-block;
+      text-align: center;
+      margin: 0 0 0 0;
+      width: 100%;
+    }
+
+    #drawTable {
+      width: 589px;
+      border-color: black;
+      border-style: solid;
+      border-width: 1px;
+      border-collapse: collapse;
+
+      min-width: 16px;
+      min-height: 16px;
+
+      td * {
+        min-width: 18px;
+        min-height: 16px !important;
+        height: 16px;
+      }
+      tr * {
+        min-width: 16px;
+        min-height: 16px !important;
+        height: 16px;
+      }
+    }
+
+    table,
+    td,
+    tr {
+      border: 1px solid black;
+      -moz-user-select: -moz-none;
+      -khtml-user-select: none;
+      -webkit-user-select: none;
+
+      /*
+         Introduced in IE 10.
+         See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
+       */
+      -ms-user-select: none;
+      user-select: none;
+    }
+  </style>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <!-- use go-debug.js when developing and go.js when deploying -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gojs/1.8.19/go-debug.js"></script>
+
+  <script src="Draw.js"></script>
+
+  <script src="../scripts/Feature.js"></script>
+  <script src="../scripts/Image.js"></script>
+  <script src="../scripts/Trainer.js"></script>
+  <script src="../scripts/Profile.js"></script>
+  <script src="../scripts/Model.js"></script>
+
+  <script src="../scripts/Main.js"></script>
+  <script>
+    var mouseDown = false;
+    var mouseColor = true;
+
+    var picture = [];
+
+    var oThis = this;
+    $(document).ready(function() {
+      document.body.onmousedown = function() {
+        mouseDown = true;
+      }
+
+      document.body.onmouseup = function() {
+        mouseDown = false;
+      }
+
+      oThis.picture = makeBlankArray(28, 28);
+      addTable();
+      run(false);
+    });
+  </script>
+</head>
+
+<body>
+  <!-- centering based on http://krustev.net/html_center_content.html -->
+  <table id="tbl_wrap">
+    <tbody>
+      <tr>
+        <td id="td_wrap">
+          <table id="drawTable">
+          </table>
+        </td>
+        <td id="td_wrap">
+          <p>Note: the handwriting in the MNIST dataset is horrid so if your handwriting is better than theirs, accuracy may be poor</p>
+          <button id="classifyBtn" onclick="onclickClassify()">Classify</button>
+          <p id="recognized" style="font-size: 48pt"></p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+
+</html>

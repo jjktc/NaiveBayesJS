@@ -2,7 +2,7 @@
  * A Feature is the fundamental base unit for classification
  */
 class Feature {
-  
+
   /**
    * Create a Feature from a given symbol
    *
@@ -21,11 +21,11 @@ class Feature {
         break;
     }
   }
-  
+
   /* GETTERS */
-  
+
   getState() {
     return this.state;
   }
-  
+
 }

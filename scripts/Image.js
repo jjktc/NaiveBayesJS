@@ -2,7 +2,7 @@
  * The basic item to categorize
  */
 class Image {
-  
+
   /**
    * Create an Image from a given array of string lines
    *
@@ -10,13 +10,13 @@ class Image {
    */
   constructor(contents) {
     this.features = [];
-    
+
     for (let line of contents) {
       let featureLine = this.processLine(line);
       this.features.push(featureLine);
     }
   }
-  
+
   /**
    * Process a string line into an array of Feature objects
    *
@@ -25,15 +25,15 @@ class Image {
    */
   processLine(line) {
     var features = [];
-    
+
     for (let character of line) {
       let feature = new Feature(character);
       features.push(feature);
     }
-    
+
     return features;
   }
-  
+
   /**
    * Get a string representation of the Image
    *
@@ -43,7 +43,7 @@ class Image {
     var contents = [];
     for (let row of this.features) {
       var rowContents = "";
-      
+
       for (let feature of row) {
         if (feature.getState()) {
           rowContents += "#";
@@ -51,17 +51,17 @@ class Image {
           rowContents += " ";
         }
       }
-      
+
       contents.push(rowContents);
     }
-    
+
     return contents;
   }
-  
+
   /* GETTERS */
-  
+
   getFeatures() {
     return this.features;
   }
-  
+
 }

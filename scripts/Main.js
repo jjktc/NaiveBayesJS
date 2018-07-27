@@ -46,6 +46,10 @@ function train(imageData, labelData) {
   let trainer = new Trainer(images, labels);
   this.model = new Model(trainer);
 
+  if (!autoClassify) {
+    return;
+  }
+
   loadFile("../training/testimages", function(classifyImageData) {
     loadFile("../training/testlabels", function(classifyLabelData) {
       let classifyTrainer = new Trainer(classifyImageData.split("\n"), classifyLabelData.split("\n"));
@@ -83,9 +87,25 @@ function classify(index) {
   document.getElementById("correctTotal").innerHTML = correctTotal;
   document.getElementById("accuracy").innerHTML = String((100 * (correctTotal / analyzedTotal))).substr(0, 2) + "%";
 
+  let imagePrint = this.classifyImages[index].print();
+  let specimen = document.getElementById("specimen");
+  specimen.innerHTML = "";
+
+  let regexLight = new RegExp(" ", 'g');
+  let regexDark = new RegExp("\\#", 'g');
+
+  for (let i = 0; i < imagePrint.length; i++) {
+    let line = imagePrint[i].replace(regexLight, "&nbsp;&nbsp;&nbsp;").replace(regexDark, "&lhblk;");
+
+    let lineObj = document.createElement("p");
+    lineObj.innerHTML = line;
+
+    specimen.appendChild(lineObj);
+  }
+
   setTimeout(function() {
     classify(index + 1);
-  }, 20);
+  }, 50);
 }
 
 /**

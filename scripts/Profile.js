@@ -2,7 +2,7 @@
  * A calculated Profile of a given image category
  */
 class Profile {
-  
+
   /**
    * Initialize a Profile of the given label
    *
@@ -10,22 +10,22 @@ class Profile {
    */
   constructor(label) {
     this.label = label;
-    
+
     this.imageSize = this.getImageSize();
     this.smoothingFactor = this.getSmoothingFactor();
-    
+
     this.probabilityTable = [];
     for (let i = 0; i < this.imageSize; i++) {
       let row = [];
-      
+
       for (let j = 0; j < this.imageSize; j++) {
         row.push(0.0);
       }
-      
+
       this.probabilityTable.push(row);
     }
   }
-  
+
   /**
    * Process the given image and affect the feature probability table
    *
@@ -40,7 +40,7 @@ class Profile {
       }
     }
   }
-  
+
   /**
    * Increment the given feature probability table cell if applicable
    *
@@ -55,7 +55,7 @@ class Profile {
       this.probabilityTable[row][col]++;
     }
   }
-  
+
   /**
    * Calculate the balanced probability table based on totals and the smoothing factor to avoid div0
    */
@@ -66,7 +66,7 @@ class Profile {
       }
     }
   }
-  
+
   /**
    * Calculate the probability an image belongs to the current set
    *
@@ -75,18 +75,18 @@ class Profile {
    */
   classifyProbability(image) {
     let features = image.getFeatures();
-    
+
     let probability = Math.log(this.profileProbability);
-    
+
     for (let row = 0; row < this.probabilityTable.length; row++) {
       for (let col = 0; col < this.probabilityTable[row].length; col++) {
         probability += this.classifyFeatureProbability(features[row][col], this.probabilityTable[row][col]);
       }
     }
-    
+
     return probability;
   }
-  
+
   /**
    * Calculate the probability of the feature based on if it matches the given set
    *
@@ -98,38 +98,38 @@ class Profile {
     if (feature.getState()) {
       return Math.log(featureProbability);
     }
-    
+
     return Math.log(1.0 - featureProbability);
   }
-  
+
   /* GETTER */
-  
+
   getLabel() {
     return this.label;
   }
-  
+
   getProbabilityTable() {
     return this.probabilityTable;
   }
-  
+
   getProfileProbability() {
     return this.profileProbability;
   }
-  
+
   setProfileProbability(probability) {
     this.profileProbability = probability;
   }
-  
+
   setProfileTotal(total) {
     this.profileTotal = total;
   }
-  
+
   getSmoothingFactor() {
     return 0.001;
   }
-  
+
   getImageSize() {
     return 28;
   }
-  
+
 }

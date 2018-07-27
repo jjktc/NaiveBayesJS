@@ -5,6 +5,9 @@
   <meta charset="utf-8">
   <title>NaiveBayesJS</title>
 
+  <!-- <link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet"> -->
+  <link href="https://fonts.googleapis.com/css?family=Playfair+Display|VT323" rel="stylesheet">
+
   <style type="text/css">
     html,
     body,
@@ -20,14 +23,19 @@
       vertical-align: middle;
       text-align: center;
     }
-    
+
     #div_wrap {
       display: inline-block;
       text-align: center;
       margin: 0 0 0 0;
       width: 100%;
-      font-size: 48pt;
+      font-size: 72pt;
       color: white;
+      line-height: 24pt;
+    }
+
+    html {
+      font-family: 'VT323', monospace;
     }
   </style>
 
@@ -54,11 +62,12 @@
   <table id="tbl_wrap">
     <tbody>
       <tr>
-        <td id="tbl_wrap">
+        <td id="td_wrap">
           <div id="div_wrap">
             <p id="analyzedTotal"></p>
             <p id="correctTotal">Training...</p>
             <p id="accuracy"></p>
+            <p id="specimen" style="font-family: 'Playfair Display', serif; font-size: 8pt; line-height:0;"></p>
           </div>
         </td>
       </tr>
