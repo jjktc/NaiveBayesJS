@@ -5,6 +5,29 @@
   <meta charset="utf-8">
   <title>NaiveBayesJS</title>
 
+  <style type="text/css">
+    html,
+    body,
+    #tbl_wrap {
+      height: 100%;
+      width: 100%;
+      padding: 0;
+      margin: 0;
+    }
+
+    #td_wrap {
+      vertical-align: middle;
+      text-align: center;
+    }
+    
+    #div_wrap {
+      display: inline-block;
+      text-align: center;
+      margin: 0 0 0 0;
+      width: 100%;
+    }
+  </style>
+
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
   <!-- use go-debug.js when developing and go.js when deploying -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gojs/1.8.19/go-debug.js"></script>
@@ -12,7 +35,9 @@
   <script src="scripts/Feature.js"></script>
   <script src="scripts/Image.js"></script>
   <script src="scripts/Trainer.js"></script>
-  
+  <script src="scripts/Profile.js"></script>
+  <script src="scripts/Model.js"></script>
+
   <script src="scripts/Main.js"></script>
   <script>
     $(document).ready(function() {
@@ -22,7 +47,20 @@
 </head>
 
 <body>
-  
+  <!-- centering based on http://krustev.net/html_center_content.html -->
+  <table id="tbl_wrap">
+    <tbody>
+      <tr>
+        <td id="tbl_wrap">
+          <div id="div_wrap">
+            <p id="analyzedTotal"></p>
+            <p id="correctTotal"></p>
+            <p id="accuracy"></p>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </body>
 
 </html>
