@@ -143,6 +143,15 @@ function hasTrueCell(row) {
   return false;
 }
 
+function onclickClear() {
+  this.picture = makeBlankArray(28, 28);
+  
+  var elements = document.getElementsByTagName("td");
+  for (var i = 0; i < elements.length; i++) {
+    elements[i].style.backgroundColor = "white";
+  }
+}
+
 function makeBlankArray(width, height) {
   var array = [];
 
