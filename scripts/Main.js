@@ -21,7 +21,6 @@ function loadFile(sourceUrl, callback) {
   xobj.open("GET", sourceUrl, true); // currently asynchronous (async|sync)
   xobj.onreadystatechange = function() {
     if (xobj.readyState == 4 && xobj.status == "200") {
-      console.log("XMLHttp Response received", xobj);
       callback(xobj.responseText);
     }
   };
@@ -30,7 +29,10 @@ function loadFile(sourceUrl, callback) {
 }
 
 /**
+ * Train the model with the given image data and label data
  *
+ * @param {string} imageData the data from the training images file
+ * @param {string} labelData the data from the training labels file
  */
 function train(imageData, labelData) {
   let images = imageData.split("\n");
@@ -62,7 +64,9 @@ function train(imageData, labelData) {
 }
 
 /**
+ * Use the generated model to classify the test set
  *
+ * @param {number} index the image index to classify
  */
 function classify(index) {
   if (index >= this.preanalyzedTotal) {
@@ -85,7 +89,9 @@ function classify(index) {
 }
 
 /**
+ * Run the Naive Bayes classifier
  *
+ * @param {boolean} autoClassify if the classifier should auto run on a test set
  */
 function run(autoClassify) {
   this.autoClassify = (autoClassify == undefined || autoClassify);
