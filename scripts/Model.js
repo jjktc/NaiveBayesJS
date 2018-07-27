@@ -1,10 +1,12 @@
 /**
- *
+ * A Model contains several probability tables for each Profile which are calculated using a given Trainer dataset
  */
 class Model {
   
   /**
+   * Build the Model using the data from the Trainer object
    *
+   * @param {Trainer} trainer the Trainer to build the Model based on
    */
   constructor(trainer) {
     this.init();
@@ -13,6 +15,9 @@ class Model {
     this.processData(trainer.getImages(), trainer.getLabels());
   }
   
+  /**
+   * Initialize the Model variables
+   */
   init() {
     this.imageSize = this.getImageSize();
     this.profileMap = this.getProfileMap();
@@ -39,7 +44,10 @@ class Model {
   }
   
   /**
+   * Process the given images and labels to build the Model
    *
+   * @param {array} images the array of Image objects
+   * @param {array} labels the array of correct labels
    */
   processData(images, labels) {
     console.log("Processing images and labels for training");
@@ -61,7 +69,10 @@ class Model {
   }
   
   /**
+   * Classify the given image using all the profiles and choose the best one
    *
+   * @param {Image} image the image to classify
+   * @return {string} the best label
    */
   classifyImage(image) {
     let maxProbability = 0.0;

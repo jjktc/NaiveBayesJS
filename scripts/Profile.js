@@ -1,10 +1,12 @@
 /**
- *
+ * A calculated Profile of a given image category
  */
 class Profile {
   
   /**
+   * Initialize a Profile of the given label
    *
+   * @param {string} label the label to use
    */
   constructor(label) {
     this.label = label;
@@ -25,7 +27,10 @@ class Profile {
   }
   
   /**
+   * Process the given image and affect the feature probability table
    *
+   * @param {Image} image the image to process the probability of
+   * @param {array} featureProbability the feature probability table
    */
   processImage(image, featureProbability) {
     let features = image.getFeatures();
@@ -37,7 +42,12 @@ class Profile {
   }
   
   /**
+   * Increment the given feature probability table cell if applicable
    *
+   * @param {Image} image the image to process features from
+   * @param {number} row the row of the table
+   * @param {number} col the col of the table
+   * @param {array} featureProbability the probability table for all features
    */
   addFeatureProbability(image, row, col, featureProbability) {
     if (image.getFeatures()[row][col].getState()) {
@@ -47,7 +57,7 @@ class Profile {
   }
   
   /**
-   *
+   * Calculate the balanced probability table based on totals and the smoothing factor to avoid div0
    */
   calculateProbabilityTable() {
     for (let row = 0; row < this.probabilityTable.length; row++) {
@@ -58,7 +68,10 @@ class Profile {
   }
   
   /**
+   * Calculate the probability an image belongs to the current set
    *
+   * @param {Image} image the image to classify
+   * @return {number} the probability it matches the training data
    */
   classifyProbability(image) {
     let features = image.getFeatures();
@@ -75,7 +88,11 @@ class Profile {
   }
   
   /**
+   * Calculate the probability of the feature based on if it matches the given set
    *
+   * @param {Feature} feature the feature to classify with
+   * @param {array} featureProbability the probability table
+   * @return {number} the probability of the singular feature
    */
   classifyFeatureProbability(feature, featureProbability) {
     if (feature.getState()) {

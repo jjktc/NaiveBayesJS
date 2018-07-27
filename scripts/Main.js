@@ -1,3 +1,4 @@
+var autoClassify = true;
 var model;
 var classifyImages;
 var classifyLabels;
@@ -34,46 +35,50 @@ function loadFile(sourceUrl, callback) {
 function train(imageData, labelData) {
   let images = imageData.split("\n");
   let labels = labelData.split("\n");
-  
+
   console.log("Training using loaded data", {
     images: images,
     labels: labels
   });
-  
+
   let trainer = new Trainer(images, labels);
   this.model = new Model(trainer);
-  
+
   loadFile("../training/testimages", function(classifyImageData) {
     loadFile("../training/testlabels", function(classifyLabelData) {
       let classifyTrainer = new Trainer(classifyImageData.split("\n"), classifyLabelData.split("\n"));
-      
+
       this.classifyImages = classifyTrainer.getImages();
       this.classifyLabels = classifyTrainer.getLabels();
-      
+
       this.correctTotal = 0;
       this.analyzedTotal = 0;
       this.preanalyzedTotal = Math.min(classifyImages.length, classifyLabels.length);
-      
-      classify(0);
+
+      if (this.autoClassify)
+        classify(0);
     });
   });
 }
 
+/**
+ *
+ */
 function classify(index) {
   if (index >= this.preanalyzedTotal) {
     return;
   }
-  
+
   this.analyzedTotal++;
   let predictedLabel = this.model.classifyImage(this.classifyImages[index]);
   let actualLabel = this.classifyLabels[index];
-  
+
   this.correctTotal += (predictedLabel == actualLabel) ? 1 : 0;
-  
+
   document.getElementById("analyzedTotal").innerHTML = analyzedTotal;
   document.getElementById("correctTotal").innerHTML = correctTotal;
-  document.getElementById("accuracy").innerHTML = String((100 * (correctTotal / analyzedTotal))).substr(0, 4) + "%";
-  
+  document.getElementById("accuracy").innerHTML = String((100 * (correctTotal / analyzedTotal))).substr(0, 2) + "%";
+
   setTimeout(function() {
     classify(index + 1);
   }, 20);
@@ -82,7 +87,9 @@ function classify(index) {
 /**
  *
  */
-function run() {
+function run(autoClassify) {
+  this.autoClassify = (autoClassify == undefined || autoClassify);
+
   loadFile("../training/trainingimages", function(images) {
     console.log("Loaded image data", {
       success: (images && images != "")
